@@ -5,7 +5,6 @@ import java.math.BigInteger;
  *
  * @author Tony Ha
  */
-
 public class Main {
 
     public static void main(String[] args) {
