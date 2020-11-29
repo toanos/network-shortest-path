@@ -1,3 +1,6 @@
+import java.math.BigInteger;
+import java.util.LinkedList;
+
 /**
  * This class represents the floating pads.
  *
@@ -9,6 +12,10 @@ public class FloatingPads {
         // TODO Implement default constructor
     }
 
+    public static void connectPads(FloatingPads u, FloatingPads v) {
+        // TODO Is this the right way to implement an adjacency list? Or should I go with adjacency matrix?
+    }
+
     /**
      * Return number of existing floating pads
      */
@@ -17,6 +24,7 @@ public class FloatingPads {
     }
 
     private static int numPads = 0;
-    private int label;
+    private BigInteger label;
+    private LinkedList<FloatingPads> neighbors;
 
 }
