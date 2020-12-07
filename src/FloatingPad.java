@@ -8,21 +8,30 @@ import java.util.LinkedList;
  */
 public class FloatingPad {
 
-    /** Construct a pad with specified value */
-    public FloatingPad(String value) {
+    /**
+     * Construct a pad with specified value
+     */
+    public FloatingPad(BigInteger value) {
         this();
-        label = new BigInteger(value);
+        label = value;
     }
 
-    /** Construct a pad with a value of zero (default constructor) */
+    /**
+     * Construct a pad with a value of zero (default constructor)
+     */
     public FloatingPad() {
         label = BigInteger.ZERO;
         minimal = true;
         maximal = true;
+        visited = false;
     }
 
-    /** Return the value of floating pad */
-    public BigInteger getLabel() { return this.label; }
+    /**
+     * Return the value of floating pad
+     */
+    public BigInteger getLabel() {
+        return this.label;
+    }
 
     public static void connectPads(FloatingPad u, FloatingPad v) {
         // TODO Is this the right way to implement an adjacency list? Or should I go with adjacency matrix?
@@ -36,13 +45,15 @@ public class FloatingPad {
         return numPads;
     }
 
-    // TODO Implement a compareTo for sorting purpose
-
     @Override
     public String toString() {
-        String padType ="(";
-        if (this.minimal) { padType += "minimal, "; }
-        if (this.minimal) { padType += "maximal"; }
+        String padType = "(";
+        if (this.minimal) {
+            padType += "minimal, ";
+        }
+        if (this.minimal) {
+            padType += "maximal";
+        }
         padType += ")";
         return padType + " " + this.label.toString();
     }
@@ -52,5 +63,6 @@ public class FloatingPad {
     private LinkedList<FloatingPad> neighbors;
     private boolean minimal;
     private boolean maximal;
+    private boolean visited;
 
 }

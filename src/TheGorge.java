@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 /**
@@ -8,13 +9,24 @@ import java.util.ArrayList;
  */
 public class TheGorge {
 
-    /** Default constructor */
-    public TheGorge() {
-        g = new ArrayList<FloatingPad>();
+    /**
+     * Construct the gorge with the specified list.
+     *
+     * @param padList an array list of BigInteger values
+     */
+    public TheGorge(ArrayList<BigInteger> padList) {
+        this();
+        for (BigInteger p : padList) {
+            g.add(new FloatingPad(p));
+        }
+        // TODO Check maximal and minimal
     }
 
-    public void addFloatingPads(FloatingPad pad) {
-        g.add(pad);
+    /**
+     * Default constructor
+     */
+    public TheGorge() {
+        g = new ArrayList<FloatingPad>();
     }
 
     public void removeFloatingPad(FloatingPad pad) {
@@ -28,5 +40,6 @@ public class TheGorge {
         }
         return result;
     }
+
     private ArrayList<FloatingPad> g;
 }

@@ -1,6 +1,10 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -11,14 +15,17 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        TheGorge saveHobbits = new TheGorge();
+        TheGorge saveHobbits = null;
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input1.txt"));
+            Scanner inFile = new Scanner(new File("input0.txt"));
+            ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();
-                saveHobbits.addFloatingPads(new FloatingPad(line));
+                inputPads.add(new BigInteger(line));
             } while (inFile.hasNextLine());
+            Collections.sort(inputPads);
+            saveHobbits = new TheGorge(inputPads);
         } catch (IOException e) {
             System.out.println("Input file does not exist! Program terminated.");
         }
