@@ -6,10 +6,10 @@ import java.util.ArrayList;
  *
  * @author Tony Ha
  */
-public class TheGore {
+public class TheGorge {
 
     /** Default constructor */
-    public TheGore() {
+    public TheGorge() {
         g = new ArrayList<FloatingPad>();
     }
 
