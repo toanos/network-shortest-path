@@ -21,5 +21,12 @@ public class TheGorge {
         g.remove(pad);
     }
 
+    public String toString() {
+        String result = "";
+        for (int i = 0; i < g.size(); i++) {
+            result += g.get(i).toString() + "\n";
+        }
+        return result;
+    }
     private ArrayList<FloatingPad> g;
 }

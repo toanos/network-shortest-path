@@ -10,7 +10,7 @@ public class FloatingPad {
 
     /** Construct a pad with specified value */
     public FloatingPad(String value) {
-        new FloatingPad();
+        this();
         label = new BigInteger(value);
     }
 
@@ -36,13 +36,15 @@ public class FloatingPad {
         return numPads;
     }
 
+    // TODO Implement a compareTo for sorting purpose
+
     @Override
     public String toString() {
         String padType ="(";
         if (this.minimal) { padType += "minimal, "; }
         if (this.minimal) { padType += "maximal"; }
         padType += ")";
-        return this.label.toString() + padType;
+        return padType + " " + this.label.toString();
     }
 
     private static int numPads = 0;

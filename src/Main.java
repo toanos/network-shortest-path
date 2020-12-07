@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import java.math.BigInteger;
 
 /**
  * CECS 328 PA5: hobbits
@@ -12,17 +11,21 @@ import java.math.BigInteger;
 public class Main {
 
     public static void main(String[] args) {
+        TheGorge saveHobbits = new TheGorge();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input0.txt"));
-            // TODO Input: The loop needs to construct floating pad or convert the string into BigInteger
+            Scanner inFile = new Scanner(new File("input1.txt"));
             do {
                 String line = inFile.nextLine();
-                System.out.println(line);
+                saveHobbits.addFloatingPads(new FloatingPad(line));
             } while (inFile.hasNextLine());
         } catch (IOException e) {
             System.out.println("Input file does not exist! Program terminated.");
         }
+
+        // Console output:
+        System.out.println(saveHobbits);
+
         // Output phase
         try {
             PrintWriter outFile = new PrintWriter("output.txt");
