@@ -2,17 +2,17 @@ import java.math.BigInteger;
 import java.util.LinkedList;
 
 /**
- * This class represents the floating pads.
+ * This class represents the floating pad for the Hobbits to hop on.
  *
  * @author Tony Ha
  */
-public class FloatingPads {
+public class FloatingPad {
 
-    public FloatingPads() {
+    public FloatingPad() {
         // TODO Implement default constructor
     }
 
-    public static void connectPads(FloatingPads u, FloatingPads v) {
+    public static void connectPads(FloatingPad u, FloatingPad v) {
         // TODO Is this the right way to implement an adjacency list? Or should I go with adjacency matrix?
     }
 
@@ -25,6 +25,8 @@ public class FloatingPads {
 
     private static int numPads = 0;
     private BigInteger label;
-    private LinkedList<FloatingPads> neighbors;
+    private LinkedList<FloatingPad> neighbors;
+    private boolean minimal;
+    private boolean maximal;
 
 }

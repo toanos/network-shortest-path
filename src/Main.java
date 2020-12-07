@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input1.txt"));
+            Scanner inFile = new Scanner(new File("input0.txt"));
             // TODO Input: The loop needs to construct floating pad or convert the string into BigInteger
             do {
                 String line = inFile.nextLine();
