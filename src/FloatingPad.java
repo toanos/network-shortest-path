@@ -20,7 +20,7 @@ public class FloatingPad {
      * Construct a pad with a value of zero (default constructor)
      */
     public FloatingPad() {
-        label = BigInteger.ZERO;
+        label = BigInteger.ONE;
         minimal = true;
         maximal = true;
         visited = false;

@@ -18,7 +18,7 @@ public class Main {
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input1.txt"));
+            Scanner inFile = new Scanner(new File("input0.txt"));
             ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();
@@ -32,7 +32,14 @@ public class Main {
 
         ArrayList<FloatingPad> pads = saveHobbits.getTheGorge();
         int gorgeSize = pads.size();
-        // Determine MINIMALITY of all the pads
+        /* NOTE: Pad 1 is not a maximal pad because hobbits can hop from it.
+         * Since it is the starting pad, it definitely not minimal since hobbits are standing on it
+         * so they can't jump onto it.
+         * Another way of thinking is that the minimal pad is the SOURCE of the graph and the maximal pad is the SINK.
+         */
+        pads.get(0).padNotMinimal();
+        pads.get(0).padNotMaximal();
+        // Determine MINIMALITY (can't hop INTO except for pad 1) of all the pads
         for (int i = gorgeSize - 1; i >= 0; i--) {
             for (int j = 0; j < i; j++) {
                 BigInteger padA = pads.get(i).getLabel();
@@ -43,9 +50,8 @@ public class Main {
                 }
             }
         }
-        // Determine MAXIMALITY of all the pads
-        // NOTE: The floating pad at index n - 1 should be maximality without checking
-        for (int i = 0; i < gorgeSize - 2; i++) {
+        // Determine MAXIMALITY (can't hop FROM) of all the pads
+        for (int i = 0; i < gorgeSize - 1; i++) {
             for (int j = i + 1; j < gorgeSize; j++) {
                 BigInteger padA = pads.get(i).getLabel();
                 BigInteger padB = pads.get(j).getLabel();

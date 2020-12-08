@@ -26,6 +26,7 @@ public class TheGorge {
      */
     public TheGorge() {
         g = new ArrayList<FloatingPad>();
+        g.add(new FloatingPad());
     }
 
     /** Return the array list of floating pads of the gorge */
