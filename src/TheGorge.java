@@ -29,6 +29,11 @@ public class TheGorge {
         g = new ArrayList<FloatingPad>();
     }
 
+    /** Return the array list of floating pads of the gorge */
+    public ArrayList<FloatingPad> getTheGorge() {
+        return this.g;
+    }
+
     public void removeFloatingPad(FloatingPad pad) {
         g.remove(pad);
     }
