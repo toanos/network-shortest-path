@@ -37,24 +37,34 @@ public class FloatingPad {
         // TODO Is this the right way to implement an adjacency list? Or should I go with adjacency matrix?
     }
 
-    /**
-     * TODO: Can be remove because the gorge should be the one keeping track of number of pads
-     * Return number of existing floating pads
-     */
-    public static int getNumPads() {
-        return numPads;
+    public void padVisited() {
+        if (!visited) {
+            this.visited = true;
+        }
+    }
+
+    public void padNotMinimal() {
+        if (this.minimal) {
+            this.minimal = false;
+        }
+    }
+
+    public void padNotMaximal() {
+        if (this.maximal) {
+            this.maximal = false;
+        }
     }
 
     @Override
     public String toString() {
-        String padType = "(";
-        if (this.minimal) {
-            padType += "minimal, ";
+        String padType = "";
+        if (this.minimal && this.maximal) { padType = "(Minimal, maximal)"; }
+        else if (this.minimal) {
+            padType = "(Minimal)";
         }
-        if (this.minimal) {
-            padType += "maximal";
+        else if (this.maximal) {
+            padType = "(Maximal)";
         }
-        padType += ")";
         return padType + " " + this.label.toString();
     }
 

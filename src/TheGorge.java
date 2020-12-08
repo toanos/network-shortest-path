@@ -19,7 +19,6 @@ public class TheGorge {
         for (BigInteger p : padList) {
             g.add(new FloatingPad(p));
         }
-        // TODO Check maximal and minimal
     }
 
     /**

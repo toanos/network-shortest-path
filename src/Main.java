@@ -29,7 +29,34 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Input file does not exist! Program terminated.");
         }
-        // Console output: List of floating pads
+
+        ArrayList<FloatingPad> pads = saveHobbits.getTheGorge();
+        int gorgeSize = pads.size();
+        // Determine MINIMALITY of all the pads
+        for (int i = gorgeSize - 1; i >= 0; i--) {
+            for (int j = 0; j < i; j++) {
+                BigInteger padA = pads.get(i).getLabel();
+                BigInteger padB = pads.get(j).getLabel();
+                if (!padB.gcd(padA).equals(BigInteger.ONE)) {
+                    pads.get(i).padNotMinimal();
+                    break;
+                }
+            }
+        }
+        // Determine MAXIMALITY of all the pads
+        // NOTE: The floating pad at index n - 1 should be maximality without checking
+        for (int i = 0; i < gorgeSize - 2; i++) {
+            for (int j = i + 1; j < gorgeSize; j++) {
+                BigInteger padA = pads.get(i).getLabel();
+                BigInteger padB = pads.get(j).getLabel();
+                if (!padB.gcd(padA).equals(BigInteger.ONE)) {
+                    pads.get(i).padNotMaximal();
+                    break;
+                }
+            }
+        }
+        // Console output
+        System.out.println("The gorge has " + gorgeSize + " floating pads.");
         System.out.println(saveHobbits);
         // Output phase
         try {
