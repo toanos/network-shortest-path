@@ -92,5 +92,6 @@ public class FloatingPad {
     private boolean visited;
     // Experiment
     private int incomingTraffic;
+    private FloatingPad parent;
 
 }
