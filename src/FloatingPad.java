@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -24,8 +25,15 @@ public class FloatingPad {
         minimal = true;
         maximal = true;
         visited = false;
+        incomingTraffic = 0;
+        parent = null;
     }
 
+    public void setParent(FloatingPad p) { this.parent = p; }
+    public FloatingPad getParent() { return this.parent; }
+
+    public int getIncomingTraffic() { return this.incomingTraffic; }
+    public void incrementTraffic() { this.incomingTraffic++; }
     /**
      * Return the value of floating pad
      */
@@ -86,5 +94,8 @@ public class FloatingPad {
     private boolean minimal;
     private boolean maximal;
     private boolean visited;
+    // Experiment
+    private int incomingTraffic;
+    private FloatingPad parent;
 
 }
