@@ -57,7 +57,8 @@ public class TheGorge {
             FloatingPad currentPad = p;
             while (!(currentPad.getParent().getLabel().compareTo(BigInteger.ONE) == 0)) {
                 currentPad = currentPad.getParent();
-                path = " " + currentPad.getLabel() + " " + path;
+//                path = " " + currentPad.getLabel() + " " + path;
+                path = currentPad.getLabel() + " " + path;
             }
             path = "1 " + path;
             return path;
