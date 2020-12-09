@@ -51,6 +51,22 @@ public class TheGorge {
         maximalNum = 0;
     }
 
+    public static String getPath(FloatingPad p) {
+        if (p.isMaximal() && p.checkVisited()) {
+            String path = p.getLabel() + "\n";
+            FloatingPad currentPad = p;
+            while (!(currentPad.getParent().getLabel().compareTo(BigInteger.ONE) == 0)) {
+                currentPad = currentPad.getParent();
+                path = " " + currentPad.getLabel() + " " + path;
+            }
+            path = "1 " + path;
+            return path;
+        } else {
+            System.out.println(p + "has not been visited.");
+            return "Error: No path for " + p;
+        }
+    }
+
     /** Return the array list of floating pads of the gorge */
     public ArrayList<FloatingPad> getTheGorge() {
         return this.floatingPads;

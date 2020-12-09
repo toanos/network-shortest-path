@@ -26,7 +26,11 @@ public class FloatingPad {
         maximal = true;
         visited = false;
         incomingTraffic = 0;
+        parent = null;
     }
+
+    public void setParent(FloatingPad p) { this.parent = p; }
+    public FloatingPad getParent() { return this.parent; }
 
     public int getIncomingTraffic() { return this.incomingTraffic; }
     public void incrementTraffic() { this.incomingTraffic++; }

@@ -60,13 +60,28 @@ public class Main {
                 }
             }
         }
+        // Connect 1 to minimal pads
+        for (FloatingPad p : pads) {
+            if (p.isMinimal()) {
+                p.setParent(pads.get(0));
+            }
+        }
+        // Finding hopping paths
+        findPaths(saveHobbits, hoppingPaths);
         // Console output
         System.out.println("The gorge has " + gorgeSize + " floating pads.");
         System.out.println(saveHobbits);
         saveHobbits.printAdjList();
+        for (String s : hoppingPaths) {
+            System.out.print(s);
+        }
         // Output phase
         try {
             PrintWriter outFile = new PrintWriter("output.txt");
+            for (String s : hoppingPaths) {
+                outFile.print(s);
+            }
+            outFile.close();
         } catch (IOException e) {
             System.out.println("Error occurred! Could not create output.txt");
         }
@@ -118,6 +133,7 @@ public class Main {
             // TODO Adjust sourcePad to fit specification, for now main alread did
             FloatingPad sourcePad = floatingPads.get(0);
             FloatingPad minimalPad = floatingPads.get(1);
+            FloatingPad maximalPad = null;
             ArrayList<ArrayList<FloatingPad>> adjGorge = evilGorge.getAdjPads();
             Queue<FloatingPad> myQ = new LinkedList<>();
             myQ.add(minimalPad);
@@ -126,13 +142,17 @@ public class Main {
                 // NOTE: index of the floating pads are the same with the adjacency list
                 int indU = floatingPads.indexOf(uPad);
                 for (FloatingPad vPad : adjGorge.get(indU)) {
+                    if (vPad.isMaximal()) { maximalPad = vPad; }
                     if (!vPad.checkVisited()) {
                         // TODO Still need to implement more
+                        vPad.setParent(uPad);
                         myQ.add(vPad);
                     }
-                    uPad.padVisited();
                 }
+                uPad.padVisited();
             }
+            // BFS finished, now store the generated path
+            paths.add(TheGorge.getPath(maximalPad));
 //        }
     }
 }
