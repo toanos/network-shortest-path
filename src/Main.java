@@ -64,6 +64,7 @@ public class Main {
         // Console output
         System.out.println("The gorge has " + gorgeSize + " floating pads.");
         System.out.println(saveHobbits);
+        saveHobbits.printAdjList();
         // Output phase
         try {
             PrintWriter outFile = new PrintWriter("output.txt");

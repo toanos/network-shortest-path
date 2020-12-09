@@ -16,8 +16,21 @@ public class TheGorge {
      */
     public TheGorge(ArrayList<BigInteger> padList) {
         this();
-        for (BigInteger p : padList) {
-            g.add(new FloatingPad(p));
+        for (BigInteger b : padList) {
+            floatingPads.add(new FloatingPad(b));
+        }
+        adjPads = new ArrayList[floatingPads.size()];
+        // Construct an adjacency-list pads
+        for (int i = 0; i < floatingPads.size(); i++) {
+            FloatingPad u = floatingPads.get(i);
+            ArrayList<FloatingPad> neighborsV = new ArrayList<>();
+            for (int j = i + 1; j < floatingPads.size(); j++) {
+               FloatingPad v = floatingPads.get(j);
+               if (u.getLabel().gcd(v.getLabel()).compareTo(BigInteger.ONE) > 0) {
+                   neighborsV.add(v);
+               }
+            }
+            adjPads[i] = neighborsV;
         }
     }
 
@@ -25,26 +38,42 @@ public class TheGorge {
      * Default constructor
      */
     public TheGorge() {
-        g = new ArrayList<FloatingPad>();
-        g.add(new FloatingPad());
+        floatingPads = new ArrayList<FloatingPad>();
+        floatingPads.add(new FloatingPad());
     }
 
     /** Return the array list of floating pads of the gorge */
     public ArrayList<FloatingPad> getTheGorge() {
-        return this.g;
+        return this.floatingPads;
     }
 
     public void removeFloatingPad(FloatingPad pad) {
-        g.remove(pad);
+        floatingPads.remove(pad);
     }
 
+    // NOTE: I might want to implement this toString to produce the path for output
     public String toString() {
         String result = "";
-        for (int i = 0; i < g.size(); i++) {
-            result += g.get(i).toString() + "\n";
+        for (int i = 0; i < floatingPads.size(); i++) {
+            result += floatingPads.get(i).toString() + "\n";
         }
         return result;
     }
 
-    private ArrayList<FloatingPad> g;
+    public void printAdjList() {
+        String result = "";
+        for (int i = 0; i < adjPads.length; i++) {
+//            result += floatingPads.get(i).getLabel().toString() + ":";
+            result += floatingPads.get(i).toString() + ":";
+            for (FloatingPad p : adjPads[i]) {
+//                result += " ->" + p.getLabel().toString();
+                result += " ->" + p.toString();
+            }
+            System.out.println(result + " /");
+            result = "";
+        }
+    }
+
+    private ArrayList<FloatingPad> floatingPads;
+    private ArrayList<FloatingPad>[] adjPads;
 }
