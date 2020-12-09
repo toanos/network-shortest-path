@@ -51,6 +51,13 @@ public class TheGorge {
         maximalPads = new ArrayList<FloatingPad>();
     }
 
+    /**
+     * Generate the path to jump to the other side of the gorge. In technical term, generate
+     * a path from pad 1 to maximal pad p
+     *
+     * @param p the destination maximal pad
+     * @return
+     */
     public static String getPath(FloatingPad p) {
         if (p.isMaximal() && p.checkVisited()) {
             String path = p.getLabel() + "\n";
@@ -67,13 +74,12 @@ public class TheGorge {
         }
     }
 
-    /**
-     * Return the array list of floating pads of the gorge
-     */
+    /** Return the list of floating pads of the gorge */
     public ArrayList<FloatingPad> getTheGorge() {
         return this.floatingPads;
     }
 
+    /** Return the adjacency list of floating pads of the gorge */
     public ArrayList<ArrayList<FloatingPad>> getAdjPads() {
         return this.adjPads;
     }
@@ -92,6 +98,7 @@ public class TheGorge {
         return result;
     }
 
+    /** Console output the adjacency list of the gorge */
     public void printAdjList() {
         String result = "";
         for (int i = 0; i < adjPads.size(); i++) {
@@ -105,10 +112,12 @@ public class TheGorge {
         }
     }
 
+    /** Return the number of maximal pads available */
     public int countMaximal() {
         return this.maximalPads.size();
     }
 
+    /** Find pre-determined maximal pads and store their references (HELPER) */
     private void trackMaximalPads() {
         for (FloatingPad p : floatingPads) {
             if (p.isMaximal()) {
