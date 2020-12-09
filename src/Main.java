@@ -17,7 +17,7 @@ public class Main {
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input1.txt"));
+            Scanner inFile = new Scanner(new File("input3.txt"));
             ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();

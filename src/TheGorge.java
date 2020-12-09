@@ -27,17 +27,17 @@ public class TheGorge {
             FloatingPad u = floatingPads.get(i);
             ArrayList<FloatingPad> neighborsV = new ArrayList<>();
             for (int j = i + 1; j < floatingPads.size(); j++) {
-               FloatingPad v = floatingPads.get(j);
-               if (u.getLabel().gcd(v.getLabel()).compareTo(BigInteger.ONE) > 0) {
-                   neighborsV.add(v);
-                   v.incrementTraffic();
-               }
+                FloatingPad v = floatingPads.get(j);
+                if (u.getLabel().gcd(v.getLabel()).compareTo(BigInteger.ONE) > 0) {
+                    neighborsV.add(v);
+                    v.incrementTraffic();
+                }
             }
             adjPads.add(neighborsV);
         }
-        /* Count maximal pads */
-        this.countMax();
         // TODO Determine minimality & maximality of newly constructed pads
+        // TODO Keep track of maximal pads
+        trackMaximalPads();
     }
 
     /**
@@ -45,10 +45,10 @@ public class TheGorge {
      */
     public TheGorge() {
         floatingPads = new ArrayList<FloatingPad>();
-        // NOTE: The floating pad 1 always the startng pad. IOW, the source vertex
+        // NOTE: The floating pad 1 always the starting pad. IOW, the source vertex
         floatingPads.add(new FloatingPad());
         adjPads = null;
-        maximalNum = 0;
+        maximalPads = new ArrayList<FloatingPad>();
     }
 
     public static String getPath(FloatingPad p) {
@@ -57,7 +57,6 @@ public class TheGorge {
             FloatingPad currentPad = p;
             while (!(currentPad.getParent().getLabel().compareTo(BigInteger.ONE) == 0)) {
                 currentPad = currentPad.getParent();
-//                path = " " + currentPad.getLabel() + " " + path;
                 path = currentPad.getLabel() + " " + path;
             }
             path = "1 " + path;
@@ -68,17 +67,15 @@ public class TheGorge {
         }
     }
 
-    /** Return the array list of floating pads of the gorge */
+    /**
+     * Return the array list of floating pads of the gorge
+     */
     public ArrayList<FloatingPad> getTheGorge() {
         return this.floatingPads;
     }
 
     public ArrayList<ArrayList<FloatingPad>> getAdjPads() {
         return this.adjPads;
-    }
-
-    public int getMaximalNum() {
-        return maximalNum;
     }
 
     public void removeFloatingPad(FloatingPad pad) {
@@ -98,11 +95,9 @@ public class TheGorge {
     public void printAdjList() {
         String result = "";
         for (int i = 0; i < adjPads.size(); i++) {
-//            result += floatingPads.get(i).getLabel().toString() + ":";
             result += "(In-degree: " + floatingPads.get(i).getIncomingTraffic() + ") ";
             result += floatingPads.get(i).toString() + ":";
             for (FloatingPad p : adjPads.get(i)) {
-//                result += " ->" + p.getLabel().toString();
                 result += " ->" + p.toString();
             }
             System.out.println(result + " /");
@@ -110,19 +105,20 @@ public class TheGorge {
         }
     }
 
-    // HELPER for counting number of maximal pads after collected pads
-    private void countMax() {
-        for (FloatingPad p : this.floatingPads) {
+    public int countMaximal() {
+        return this.maximalPads.size();
+    }
+
+    private void trackMaximalPads() {
+        for (FloatingPad p : floatingPads) {
             if (p.isMaximal()) {
-                maximalNum++;
+                this.maximalPads.add(p);
             }
         }
     }
 
-    // Note: Vertices of the graph
-    private ArrayList<FloatingPad> floatingPads;
-    // Note: The adjacency list of the graph
-    private ArrayList<ArrayList<FloatingPad>> adjPads;
-    private int maximalNum;
+    private ArrayList<FloatingPad> floatingPads; // Note: Vertices of the graph
+    private ArrayList<FloatingPad> maximalPads;
+    private ArrayList<ArrayList<FloatingPad>> adjPads; // Note: The adjacency list of the graph
 
 }
