@@ -19,7 +19,7 @@ public class TheGorge {
         for (BigInteger b : padList) {
             floatingPads.add(new FloatingPad(b));
         }
-        adjPads = new ArrayList[floatingPads.size()];
+        adjPads = new ArrayList<>();
         /* Construct an adjacency-list pads */
         for (int i = 0; i < floatingPads.size(); i++) {
             FloatingPad u = floatingPads.get(i);
@@ -30,7 +30,7 @@ public class TheGorge {
                    neighborsV.add(v);
                }
             }
-            adjPads[i] = neighborsV;
+            adjPads.add(neighborsV);
         }
         /* Count maximal pads */
         this.countMax();
@@ -53,7 +53,7 @@ public class TheGorge {
         return this.floatingPads;
     }
 
-    public ArrayList<FloatingPad>[] getAdjPads() {
+    public ArrayList<ArrayList<FloatingPad>> getAdjPads() {
         return this.adjPads;
     }
 
@@ -63,6 +63,7 @@ public class TheGorge {
 
     public void removeFloatingPad(FloatingPad pad) {
         floatingPads.remove(pad);
+        adjPads.remove(pad);
     }
 
     // NOTE: I might want to implement this toString to produce the path for output
@@ -76,10 +77,10 @@ public class TheGorge {
 
     public void printAdjList() {
         String result = "";
-        for (int i = 0; i < adjPads.length; i++) {
+        for (int i = 0; i < adjPads.size(); i++) {
 //            result += floatingPads.get(i).getLabel().toString() + ":";
             result += floatingPads.get(i).toString() + ":";
-            for (FloatingPad p : adjPads[i]) {
+            for (FloatingPad p : adjPads.get(i)) {
 //                result += " ->" + p.getLabel().toString();
                 result += " ->" + p.toString();
             }
@@ -100,7 +101,7 @@ public class TheGorge {
     // Note: Vertices of the graph
     private ArrayList<FloatingPad> floatingPads;
     // Note: The adjacency list of the graph
-    private ArrayList<FloatingPad>[] adjPads;
+    private ArrayList<ArrayList<FloatingPad>> adjPads;
     private int maximalNum;
 
 }
