@@ -18,6 +18,8 @@ public class TheGorge {
         this();
         for (BigInteger b : padList) {
             floatingPads.add(new FloatingPad(b));
+            // NOTE: these new pads have at least 1 in-degree
+            floatingPads.get(floatingPads.size() - 1).incrementTraffic();
         }
         adjPads = new ArrayList<>();
         /* Construct an adjacency-list pads */
@@ -28,6 +30,7 @@ public class TheGorge {
                FloatingPad v = floatingPads.get(j);
                if (u.getLabel().gcd(v.getLabel()).compareTo(BigInteger.ONE) > 0) {
                    neighborsV.add(v);
+                   v.incrementTraffic();
                }
             }
             adjPads.add(neighborsV);
@@ -79,6 +82,7 @@ public class TheGorge {
         String result = "";
         for (int i = 0; i < adjPads.size(); i++) {
 //            result += floatingPads.get(i).getLabel().toString() + ":";
+            result += "(In-degree: " + floatingPads.get(i).getIncomingTraffic() + ") ";
             result += floatingPads.get(i).toString() + ":";
             for (FloatingPad p : adjPads.get(i)) {
 //                result += " ->" + p.getLabel().toString();
