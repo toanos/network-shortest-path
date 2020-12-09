@@ -58,7 +58,7 @@ public class FloatingPad {
     @Override
     public String toString() {
         String padType = "";
-        if (this.minimal && this.maximal) { padType = "(Minimal, maximal)"; }
+        if (this.minimal && this.maximal) { padType = "(Minimal, Maximal)"; }
         else if (this.minimal) {
             padType = "(Minimal)";
         }
