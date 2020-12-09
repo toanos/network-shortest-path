@@ -20,7 +20,7 @@ public class TheGorge {
             floatingPads.add(new FloatingPad(b));
         }
         adjPads = new ArrayList[floatingPads.size()];
-        // Construct an adjacency-list pads
+        /* Construct an adjacency-list pads */
         for (int i = 0; i < floatingPads.size(); i++) {
             FloatingPad u = floatingPads.get(i);
             ArrayList<FloatingPad> neighborsV = new ArrayList<>();
@@ -32,6 +32,9 @@ public class TheGorge {
             }
             adjPads[i] = neighborsV;
         }
+        /* Count maximal pads */
+        this.countMax();
+        // TODO Determine minimality & maximality of newly constructed pads
     }
 
     /**
@@ -39,12 +42,23 @@ public class TheGorge {
      */
     public TheGorge() {
         floatingPads = new ArrayList<FloatingPad>();
+        // NOTE: The floating pad 1 always the startng pad. IOW, the source vertex
         floatingPads.add(new FloatingPad());
+        adjPads = null;
+        maximalNum = 0;
     }
 
     /** Return the array list of floating pads of the gorge */
     public ArrayList<FloatingPad> getTheGorge() {
         return this.floatingPads;
+    }
+
+    public ArrayList<FloatingPad>[] getAdjPads() {
+        return this.adjPads;
+    }
+
+    public int getMaximalNum() {
+        return maximalNum;
     }
 
     public void removeFloatingPad(FloatingPad pad) {
@@ -74,6 +88,19 @@ public class TheGorge {
         }
     }
 
+    // HELPER for counting number of maximal pads after collected pads
+    private void countMax() {
+        for (FloatingPad p : this.floatingPads) {
+            if (p.isMaximal()) {
+                maximalNum++;
+            }
+        }
+    }
+
+    // Note: Vertices of the graph
     private ArrayList<FloatingPad> floatingPads;
+    // Note: The adjacency list of the graph
     private ArrayList<FloatingPad>[] adjPads;
+    private int maximalNum;
+
 }

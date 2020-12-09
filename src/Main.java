@@ -2,9 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * CECS 328 PA5: Find the maximal way of hopping through the gorge to save as many hobbits as possible.
@@ -14,11 +12,12 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        int gorgeSize = 0;
         TheGorge saveHobbits = null;
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input2.txt"));
+            Scanner inFile = new Scanner(new File("input0.txt"));
             ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();
@@ -31,7 +30,7 @@ public class Main {
         }
 
         ArrayList<FloatingPad> pads = saveHobbits.getTheGorge();
-        int gorgeSize = pads.size();
+        gorgeSize = pads.size();
         /* NOTE: Pad 1 is not a maximal pad because hobbits can hop from it.
          * Since it is the starting pad, it definitely not minimal since hobbits are standing on it
          * so they can't jump onto it.
@@ -70,6 +69,37 @@ public class Main {
             PrintWriter outFile = new PrintWriter("output.txt");
         } catch (IOException e) {
             System.out.println("Error occurred! Could not create output.txt");
+        }
+    }
+
+    // NOTE the paths parameter is pass by reference
+    public static void findPaths(TheGorge evilGorge, ArrayList<String> paths) {
+        // TODO Save Hobbits using BFS
+        // while number of maximal pads is greater than 0
+        //    start at the smallest minimal pad
+        //    BFS from source to a maximal pad
+        //    Reconstruct the adjacency list
+        //    Reset pads back to default value
+        ArrayList<FloatingPad> floatingPads = evilGorge.getTheGorge();
+        while (evilGorge.getMaximalNum() > 0) {
+            // TODO BFS
+            // TODO Adjust sourcePad to fit specification, for now main alread did
+            FloatingPad sourcePad = floatingPads.get(0);
+            ArrayList<FloatingPad>[] adjGorge = evilGorge.getAdjPads();
+            Queue<FloatingPad> myQ = new LinkedList<>();
+            myQ.add(sourcePad);
+            while (myQ.size() > 0) {
+                FloatingPad uPad = myQ.remove();
+                // NOTE: index of the floating pads are the same with the adjacency list
+                int indU = floatingPads.indexOf(uPad);
+                for (FloatingPad vPad : adjGorge[indU]) {
+                    if (vPad.checkVisited() == false) {
+                        // TODO Still need to implement more
+                        myQ.add(vPad);
+                    }
+                    uPad.padVisited();
+                }
+            }
         }
     }
 

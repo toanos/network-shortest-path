@@ -33,8 +33,20 @@ public class FloatingPad {
         return this.label;
     }
 
+    public boolean checkVisited() {
+        return this.visited;
+    }
+
     public static void connectPads(FloatingPad u, FloatingPad v) {
         // TODO Is this the right way to implement an adjacency list? Or should I go with adjacency matrix?
+    }
+
+    public boolean isMinimal() {
+        return this.minimal;
+    }
+
+    public boolean isMaximal() {
+        return this.maximal;
     }
 
     public void padVisited() {
@@ -58,11 +70,11 @@ public class FloatingPad {
     @Override
     public String toString() {
         String padType = "";
-        if (this.minimal && this.maximal) { padType = "(Minimal, Maximal)"; }
-        else if (this.minimal) {
+        if (this.minimal && this.maximal) {
+            padType = "(Minimal, Maximal)";
+        } else if (this.minimal) {
             padType = "(Minimal)";
-        }
-        else if (this.maximal) {
+        } else if (this.maximal) {
             padType = "(Maximal)";
         }
         return padType + " " + this.label.toString();
