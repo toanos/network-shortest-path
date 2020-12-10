@@ -75,9 +75,9 @@ public class TheGorge {
         String result = "";
         if (targetPad.isMaximal() && targetPad.checkVisited()) {
             result = targetPad.getLabel() + " \n";
-            FloatingPad currentPad = targetPad;
-            while (!(currentPad.getParent().getLabel().compareTo(BigInteger.ONE) == 0)) {
-                currentPad = currentPad.getParent();
+            FloatingPad currentPad = removePad(targetPad);
+            while (!currentPad.getParent().equals(floatingPads.get(0))) {
+                currentPad = removePad(currentPad.getParent());
                 result = currentPad.getLabel() + " " + result;
             }
             result = "1 " + result;
@@ -89,15 +89,22 @@ public class TheGorge {
         return result;
     }
 
-    /** Remove a floating pad. Formally, traverse the floating pad list and remove the specified element */
-    private void removePad(FloatingPad p) {
+    /**
+     * Remove a floating pad. Formally, traverse the floating pad list and remove the specified element.
+     *
+     * @return The removed floating. Otherwise, returns null
+     */
+    private FloatingPad removePad(FloatingPad p) {
+        FloatingPad result = null;
         ListIterator<FloatingPad> flPadListIt = this.floatingPads.listIterator();
         while (flPadListIt.hasNext()) {
             FloatingPad q = flPadListIt.next();
             if (p.equals(q)) {
+                result = q;
                 flPadListIt.remove();
             }
         }
+        return result;
     }
 
     /**
