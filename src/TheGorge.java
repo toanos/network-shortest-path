@@ -21,8 +21,15 @@ public class TheGorge {
             // NOTE: these new pads have at least 1 in-degree
             floatingPads.get(floatingPads.size() - 1).incrementTraffic();
         }
-        adjPads = new ArrayList<>();
         /* Construct an adjacency-list pads */
+        constructAdjFloatingPads();
+        // TODO Determine minimality & maximality of newly constructed pads
+        // TODO Keep track of maximal pads
+        trackMaximalPads();
+    }
+
+    private void constructAdjFloatingPads() {
+        adjPads = new ArrayList<>();
         for (int i = 0; i < floatingPads.size(); i++) {
             FloatingPad u = floatingPads.get(i);
             ArrayList<FloatingPad> neighborsV = new ArrayList<>();
@@ -35,9 +42,6 @@ public class TheGorge {
             }
             adjPads.add(neighborsV);
         }
-        // TODO Determine minimality & maximality of newly constructed pads
-        // TODO Keep track of maximal pads
-        trackMaximalPads();
     }
 
     public void initializePadScore() {
