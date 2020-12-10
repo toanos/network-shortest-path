@@ -72,17 +72,19 @@ public class Main {
         System.out.println("The gorge has " + gorgeSize + " floating pads.");
         System.out.println(saveHobbits);
         saveHobbits.printAdjList();
+        System.out.println();
+        System.out.println("Frodo found " + hoppingPaths.size() + " path(s):");
         for (String s : hoppingPaths) {
             System.out.print(s);
         }
         ////////////////// PQ Testing /////////////////////
-        saveHobbits.initializePadScore();
-        PriorityQueue<FloatingPad> h = new PriorityQueue<>(pads);
-        System.out.println("Print Priority Queue h");
-        while (h.peek() != null) {
-            FloatingPad p = h.poll();
-            System.out.println(p + ", Score = " + p.getScore());
-        }
+//        saveHobbits.initializePadScore();
+//        PriorityQueue<FloatingPad> h = new PriorityQueue<>(pads);
+//        System.out.println("Print Priority Queue h");
+//        while (h.peek() != null) {
+//            FloatingPad p = h.poll();
+//            System.out.println(p + ", Score = " + p.getScore());
+//        }
         ////////////////// End of PQ Testing /////////////////////
         // Output phase
         try {
@@ -95,44 +97,6 @@ public class Main {
             System.out.println("Error occurred! Could not create output4.txt");
         }
     }
-
-    // NOTE the paths parameter is pass by reference
-//    public static void findPaths(TheGorge evilGorge, ArrayList<String> paths) {
-//        // TODO Save Hobbits using BFS
-//        // while number of maximal pads is greater than 0
-//        //    start at the smallest minimal pad
-//        //    BFS from source to a maximal pad
-//        //    Reconstruct the adjacency list
-//        //    Reset pads back to default value
-//        ArrayList<FloatingPad> floatingPads = evilGorge.getTheGorge();
-////        while (evilGorge.getMaximalNum() > 0) {
-//            // NOTE: If a path is both minimal & maximal, take that path first
-//            // TODO BFS
-//            // TODO Adjust sourcePad to fit specification, for now main alread did
-//            FloatingPad sourcePad = floatingPads.get(0);
-//            FloatingPad minimalPad = floatingPads.get(1);
-//            FloatingPad maximalPad = null;
-//            ArrayList<ArrayList<FloatingPad>> adjGorge = evilGorge.getAdjPads();
-//            Queue<FloatingPad> myQ = new LinkedList<>();
-//            myQ.add(minimalPad);
-//            while (myQ.size() > 0) {
-//                FloatingPad uPad = myQ.remove();
-//                // NOTE: index of the floating pads are the same with the adjacency list
-//                int indU = floatingPads.indexOf(uPad);
-//                for (FloatingPad vPad : adjGorge.get(indU)) {
-//                    if (vPad.isMaximal()) { maximalPad = vPad; }
-//                    if (!vPad.checkVisited()) {
-//                        // TODO Still need to implement more
-//                        vPad.setParent(uPad);
-//                        myQ.add(vPad);
-//                    }
-//                }
-//                uPad.padVisited();
-//            }
-//            // BFS finished, now store the generated path
-//            paths.add(TheGorge.getPath(maximalPad));
-////        }
-//    }
 
     // NOTE the paths parameter is pass by reference
     public static void findPaths(TheGorge evilGorge, ArrayList<String> paths) {
