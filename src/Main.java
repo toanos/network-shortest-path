@@ -30,32 +30,19 @@ public class Main {
 
         ArrayList<FloatingPad> pads = saveHobbits.getTheGorge();
         // Console output
-        System.out.println("The gorge has " + pads.size() + " floating pads.");
-        System.out.println(saveHobbits);
-        saveHobbits.printAdjList();
+        ConsoleOutput(saveHobbits, pads);
         System.out.println();
         ///////////////////////////////////// Frodo perform Dijkstra's algorithm /////////////////////////////////
         FloatingPad test = hopShortestPath(pads.get(1), saveHobbits);
         hoppingPaths.add(saveHobbits.hobbitHoppingPad(test));
         ///////////////////////////////////// End of Frodo perform Dijkstra's algorithm //////////////////////////
         // Console output
-        System.out.println("The gorge has " + pads.size() + " floating pads.");
-        System.out.println(saveHobbits);
-        saveHobbits.printAdjList();
+        ConsoleOutput(saveHobbits, pads);
         System.out.println();
         System.out.println("Frodo found " + hoppingPaths.size() + " path(s):");
         for (String s : hoppingPaths) {
             System.out.print(s);
         }
-        ////////////////// PQ Testing /////////////////////
-//        saveHobbits.initializePadScore();
-//        PriorityQueue<FloatingPad> h = new PriorityQueue<>(pads);
-//        System.out.println("Print Priority Queue h");
-//        while (h.peek() != null) {
-//            FloatingPad p = h.poll();
-//            System.out.println(p + ", Score = " + p.getScore());
-//        }
-        ////////////////// End of PQ Testing /////////////////////
         // Output phase
         try {
             PrintWriter outFile = new PrintWriter("output.txt");
@@ -66,6 +53,12 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Error occurred! Could not create output4.txt");
         }
+    }
+
+    private static void ConsoleOutput(TheGorge saveHobbits, ArrayList<FloatingPad> pads) {
+        System.out.println("The gorge has " + pads.size() + " floating pads.");
+        System.out.println(saveHobbits);
+        saveHobbits.printAdjList();
     }
 
     /**

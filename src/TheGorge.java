@@ -128,10 +128,17 @@ public class TheGorge {
         return result;
     }
 
+    /** Reset values of existing floating pad */
     private void resetGorge() {
         for (FloatingPad p : floatingPads) {
             p.reinitializeFloatingPad();
             p.clearIncomingTraffic();
+        }
+    }
+
+    public void reinitializeGorge() {
+        for (FloatingPad p : floatingPads) {
+            p.reinitializeFloatingPad();
         }
     }
 
