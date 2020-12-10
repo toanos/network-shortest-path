@@ -52,16 +52,21 @@ public class TheGorge {
                 }
             }
         }
+        connectMinimalPadsToOne();
+        /* Construct an adjacency-list pads */
+        constructAdjFloatingPads();
+        trackMinimalPads();
+        trackMaximalPads();
+    }
+
+    /** Set pad 1 as parent of minimal pads (Helper) */
+    private void connectMinimalPadsToOne() {
         // Connect 1 to minimal pads
         for (FloatingPad p : floatingPads) {
             if (p.isMinimal()) {
                 p.setParent(floatingPads.get(0));
             }
         }
-        /* Construct an adjacency-list pads */
-        constructAdjFloatingPads();
-        trackMinimalPads();
-        trackMaximalPads();
     }
 
     /**
@@ -138,6 +143,7 @@ public class TheGorge {
             p.reinitializeFloatingPad();
             p.clearIncomingTraffic();
         }
+        connectMinimalPadsToOne();
     }
 
     public void reinitializeGorge() {
@@ -239,6 +245,10 @@ public class TheGorge {
     }
 
     public ArrayList<FloatingPad> getMaximalPads() {
+        return this.maximalPads;
+    }
+
+    public ArrayList<FloatingPad> getMinimalPads() {
         return this.maximalPads;
     }
 
