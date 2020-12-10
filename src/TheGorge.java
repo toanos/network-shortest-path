@@ -58,16 +58,15 @@ public class TheGorge {
     }
 
     /**
-     * Generate the path to jump to the other side of the gorge. In technical term, generate
-     * a path from pad 1 to maximal pad p
+     * Once the hobbit crosses to the other side, the traversed pad will drop into the gorge.
      *
-     * @param p the destination maximal pad
-     * @return
+     * @param targetPad the floating pad the hobbit needs to reach in order to be saved
+     * @return the path the hobbit traversed
      */
-    public static String getPath(FloatingPad p) {
-        if (p.isMaximal() && p.checkVisited()) {
-            String path = p.getLabel() + " \n";
-            FloatingPad currentPad = p;
+    public String hobbitHoppingPad (FloatingPad targetPad) {
+        if (targetPad.isMaximal() && targetPad.checkVisited()) {
+            String path = targetPad.getLabel() + " \n";
+            FloatingPad currentPad = targetPad;
             while (!(currentPad.getParent().getLabel().compareTo(BigInteger.ONE) == 0)) {
                 currentPad = currentPad.getParent();
                 path = currentPad.getLabel() + " " + path;
@@ -75,8 +74,8 @@ public class TheGorge {
             path = "1 " + path;
             return path;
         } else {
-            System.out.println(p + "has not been visited.");
-            return "Error: No path for " + p;
+            System.out.println(targetPad + "has not been visited.");
+            return "Error: No path for " + targetPad;
         }
     }
 
@@ -134,6 +133,7 @@ public class TheGorge {
 
     public ArrayList<FloatingPad> getMaximalPads() { return this.maximalPads; }
 
+    // Gorge's instances
     private ArrayList<FloatingPad> floatingPads; // Note: Vertices of the graph
     private ArrayList<FloatingPad> maximalPads;
     // NOTE: HAve a list for tracking minimal pads

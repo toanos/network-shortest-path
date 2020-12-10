@@ -17,7 +17,7 @@ public class Main {
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input2.txt"));
+            Scanner inFile = new Scanner(new File("input0.txt"));
             ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();
@@ -145,7 +145,7 @@ public class Main {
             if (p.isMinimal() && p.isMaximal()) {
                 p.padVisited();
                 p.setParent(sourcePad);
-                paths.add(TheGorge.getPath(p));
+                paths.add(evilGorge.hobbitHoppingPad(p));
                 // Need to somehow remove this path
             }
         }
@@ -169,7 +169,7 @@ public class Main {
             uPad.padVisited();
         }
         // BFS finished, now store the generated path
-        paths.add(TheGorge.getPath(maximalPad));
+        paths.add(evilGorge.hobbitHoppingPad(maximalPad));
 //        }
     }
 }
