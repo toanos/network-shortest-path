@@ -16,7 +16,7 @@ public class Main {
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input0.txt"));
+            Scanner inFile = new Scanner(new File("input.txt"));
             ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();
@@ -44,7 +44,7 @@ public class Main {
             hoppingPaths.add(saveHobbits.hobbitHoppingPad(q));
         }
         ConsoleOutput(saveHobbits, pads);
-        while (saveHobbits.getMinimalPads().size() != 0 || saveHobbits.getMaximalPads().size() != 0) {
+        while (saveHobbits.getMaximalPads().size() != 0) {
             ArrayList<FloatingPad> minPads = saveHobbits.getMinimalPads();
             FloatingPad shortestPath = minPads.get(0);
             double minScore = findShortestPath(shortestPath, saveHobbits);
