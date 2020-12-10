@@ -6,7 +6,7 @@ import java.util.LinkedList;
  *
  * @author Tony Ha
  */
-public class FloatingPad {
+public class FloatingPad implements Comparable<FloatingPad> {
 
     /**
      * Construct a pad with specified value
@@ -98,6 +98,20 @@ public class FloatingPad {
         return padType + " " + this.label.toString();
     }
 
+    @Override
+    public int compareTo(FloatingPad b) {
+        if (this.score < b.getScore()) {
+            return -1;
+        } else if (this.score > b.getScore()) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
     private static int numPads = 0;
     private BigInteger label;
     private boolean minimal;
@@ -106,6 +120,7 @@ public class FloatingPad {
     private FloatingPad parent;
     // Experiment
     private int incomingTraffic;
+    private int score;
     private LinkedList<FloatingPad> neighbors;
 
 }
