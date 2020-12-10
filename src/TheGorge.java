@@ -22,7 +22,7 @@ public class TheGorge {
             // NOTE: these new pads have at least 1 in-degree
             floatingPads.get(floatingPads.size() - 1).incrementTraffic();
         }
-        // TODO Determine minimality & maximality of newly constructed pads
+        // Determine minimality & maximality of newly constructed pads
         /* NOTE: Pad 1 is not a maximal pad because hobbits can hop from it.
          * Since it is the starting pad, it definitely not minimal since hobbits are standing on it
          * so they can't jump onto it.

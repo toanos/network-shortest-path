@@ -67,10 +67,6 @@ public class FloatingPad implements Comparable<FloatingPad> {
         return this.visited;
     }
 
-    public static void connectPads(FloatingPad u, FloatingPad v) {
-        // TODO Is this the right way to implement an adjacency list? Or should I go with adjacency matrix?
-    }
-
     public boolean isMinimal() {
         return this.minimal;
     }
