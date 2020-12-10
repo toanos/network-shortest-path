@@ -34,8 +34,8 @@ public class Main {
         System.out.println(saveHobbits);
         saveHobbits.printAdjList();
         System.out.println();
-        // Finding hopping paths
-        findPaths(saveHobbits, hoppingPaths);
+        ///////////////////////////////////// Frodo perform Dijkstra's algorithm /////////////////////////////////
+        ///////////////////////////////////// End of Frodo perform Dijkstra's algorithm //////////////////////////
         // Console output
         System.out.println("The gorge has " + pads.size() + " floating pads.");
         System.out.println(saveHobbits);
