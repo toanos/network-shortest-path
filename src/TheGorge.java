@@ -68,19 +68,20 @@ public class TheGorge {
      * @return the path the hobbit traversed
      */
     public String hobbitHoppingPad (FloatingPad targetPad) {
+        String result = "";
         if (targetPad.isMaximal() && targetPad.checkVisited()) {
-            String path = targetPad.getLabel() + " \n";
+            result = targetPad.getLabel() + " \n";
             FloatingPad currentPad = targetPad;
             while (!(currentPad.getParent().getLabel().compareTo(BigInteger.ONE) == 0)) {
                 currentPad = currentPad.getParent();
-                path = currentPad.getLabel() + " " + path;
+                result = currentPad.getLabel() + " " + result;
             }
-            path = "1 " + path;
-            return path;
+            result = "1 " + result;
         } else {
             System.out.println(targetPad + "has not been visited.");
-            return "Error: No path for " + targetPad;
+            result = "Error: No path for " + targetPad;
         }
+        return result;
     }
 
     /** Return the list of floating pads of the gorge */
