@@ -17,7 +17,7 @@ public class Main {
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input0.txt"));
+            Scanner inFile = new Scanner(new File("input2.txt"));
             ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();
@@ -136,15 +136,10 @@ public class Main {
 
     // NOTE the paths parameter is pass by reference
     public static void findPaths(TheGorge evilGorge, ArrayList<String> paths) {
-        // TODO Save Hobbits using BFS
-        // while number of maximal pads is greater than 0
-        //    start at the smallest minimal pad
-        //    BFS from source to a maximal pad
-        //    Reconstruct the adjacency list
-        //    Reset pads back to default value
+        // NOTE: Use a list of pad to keep track of potential hopping path for the Hobbits
         ArrayList<FloatingPad> floatingPads = evilGorge.getTheGorge();
         FloatingPad sourcePad = floatingPads.get(0);
-//        while (evilGorge.getMaximalNum() > 0) {
+//        while (evilGorge.getMaximalPads().size() > 0) {
         // NOTE: If a path is both minimal & maximal, take that path first
         for (FloatingPad p : evilGorge.getMaximalPads()) {
             if (p.isMinimal() && p.isMaximal()) {
@@ -154,7 +149,6 @@ public class Main {
                 // Need to somehow remove this path
             }
         }
-        // TODO Adjust sourcePad to fit specification, for now main alread did
         FloatingPad minimalPad = floatingPads.get(1);
         FloatingPad maximalPad = null;
         ArrayList<ArrayList<FloatingPad>> adjGorge = evilGorge.getAdjPads();

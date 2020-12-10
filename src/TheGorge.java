@@ -136,6 +136,7 @@ public class TheGorge {
 
     private ArrayList<FloatingPad> floatingPads; // Note: Vertices of the graph
     private ArrayList<FloatingPad> maximalPads;
+    // NOTE: HAve a list for tracking minimal pads
     private ArrayList<ArrayList<FloatingPad>> adjPads; // Note: The adjacency list of the graph
 
 }

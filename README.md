@@ -1,6 +1,10 @@
 # Hobbits
 Dr. Goldstein's PA 5: hobbits
 ***
+# Objective:
+1. There are a certain amount of maximal and minimal pads for Hobbits to reach to the other side. Either one of those pads run out, GAME OVER!
+2. Use Dijkstra's algorithm to help Frodo finds efficient paths.
+3. Definition of efficient: Find the shortest path that has the smallest traffic of traversal.
 ## Input:
 A list of numbers that represent the value of each floating pad.
 ## Process:

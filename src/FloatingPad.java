@@ -86,6 +86,26 @@ public class FloatingPad implements Comparable<FloatingPad> {
         }
     }
 
+
+
+
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void setScore(int s) { this.score = s; }
+
+    @Override
+    public int compareTo(FloatingPad b) {
+        if (this.score < b.getScore()) {
+            return -1;
+        } else if (this.score > b.getScore()) {
+            return 1;
+        }
+        return 0;
+    }
+
     @Override
     public String toString() {
         String padType = "";
@@ -99,30 +119,12 @@ public class FloatingPad implements Comparable<FloatingPad> {
         return padType + " " + this.label.toString();
     }
 
-    @Override
-    public int compareTo(FloatingPad b) {
-        if (this.score < b.getScore()) {
-            return -1;
-        } else if (this.score > b.getScore()) {
-            return 1;
-        }
-        return 0;
-    }
-
-    public int getScore() {
-        return this.score;
-    }
-    public void setScore(int s) { this.score = s; }
-
-    private static int numPads = 0;
     private BigInteger label;
     private boolean minimal;
     private boolean maximal;
     private boolean visited;
     private FloatingPad parent;
-    // Experiment
     private int incomingTraffic;
     private int score;
-    private LinkedList<FloatingPad> neighbors;
 
 }
