@@ -150,6 +150,7 @@ public class TheGorge {
         for (FloatingPad p : floatingPads) {
             p.reinitializeFloatingPad();
         }
+        connectMinimalPadsToOne();
     }
 
     /**
@@ -226,6 +227,7 @@ public class TheGorge {
      * Find pre-determined maximal pads and store their references (HELPER)
      */
     private void trackMaximalPads() {
+        maximalPads.clear();
         for (FloatingPad p : floatingPads) {
             if (p.isMaximal()) {
                 this.maximalPads.add(p);
@@ -237,6 +239,7 @@ public class TheGorge {
      * Find pre-determined maximal pads and store their references (HELPER)
      */
     private void trackMinimalPads() {
+        minimalPads.clear();
         for (FloatingPad p : floatingPads) {
             if (p.isMinimal()) {
                 this.minimalPads.add(p);
@@ -249,7 +252,7 @@ public class TheGorge {
     }
 
     public ArrayList<FloatingPad> getMinimalPads() {
-        return this.maximalPads;
+        return this.minimalPads;
     }
 
     // Gorge's instances

@@ -29,7 +29,6 @@ public class Main {
         }
 
         ArrayList<FloatingPad> pads = saveHobbits.getTheGorge();
-        // Console output
         ConsoleOutput(saveHobbits, pads);
         System.out.println();
         ///////////////////////////////////// Frodo perform Dijkstra's algorithm /////////////////////////////////
@@ -44,11 +43,25 @@ public class Main {
         for (FloatingPad q : simplePaths) {
             hoppingPaths.add(saveHobbits.hobbitHoppingPad(q));
         }
+        ConsoleOutput(saveHobbits, pads);
         while (saveHobbits.getMinimalPads().size() != 0 || saveHobbits.getMaximalPads().size() != 0) {
-           // TODO Implement my paths finding
+            ArrayList<FloatingPad> minPads = saveHobbits.getMinimalPads();
+            FloatingPad shortestPath = minPads.get(0);
+            double minScore = findShortestPath(shortestPath, saveHobbits);
+            saveHobbits.reinitializeGorge();
+            for (int i = 1; i < minPads.size(); i++) {
+                double s = findShortestPath(minPads.get(i), saveHobbits);
+                if (s < minScore) {
+                    minScore = s;
+                    shortestPath = minPads.get(i);
+                }
+                saveHobbits.reinitializeGorge();
+            }
+            // NOTE Shortest path is computed and return a maximal pad
+            shortestPath = hopShortestPath(shortestPath, saveHobbits);
+            hoppingPaths.add(saveHobbits.hobbitHoppingPad(shortestPath));
         }
         ///////////////////////////////////// End of Frodo perform Dijkstra's algorithm //////////////////////////
-        // Console output
         ConsoleOutput(saveHobbits, pads);
         System.out.println();
         System.out.println("Frodo found " + hoppingPaths.size() + " path(s):");
@@ -125,6 +138,7 @@ public class Main {
         PriorityQueue<FloatingPad> pQ = new PriorityQueue<>(padList);
         while (!pQ.isEmpty()) {
             FloatingPad u = pQ.poll();
+            result = u.getScore();
             if (u.getScore() < Double.POSITIVE_INFINITY) {
                 int uAdjIndex = padList.indexOf(u);
                 for (FloatingPad v : adjPads.get(uAdjIndex)) {
