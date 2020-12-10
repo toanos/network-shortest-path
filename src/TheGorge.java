@@ -132,6 +132,8 @@ public class TheGorge {
         }
     }
 
+    public ArrayList<FloatingPad> getMaximalPads() { return this.maximalPads; }
+
     private ArrayList<FloatingPad> floatingPads; // Note: Vertices of the graph
     private ArrayList<FloatingPad> maximalPads;
     private ArrayList<ArrayList<FloatingPad>> adjPads; // Note: The adjacency list of the graph

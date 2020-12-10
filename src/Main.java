@@ -143,11 +143,18 @@ public class Main {
         //    Reconstruct the adjacency list
         //    Reset pads back to default value
         ArrayList<FloatingPad> floatingPads = evilGorge.getTheGorge();
+        FloatingPad sourcePad = floatingPads.get(0);
 //        while (evilGorge.getMaximalNum() > 0) {
         // NOTE: If a path is both minimal & maximal, take that path first
-        // TODO BFS
+        for (FloatingPad p : evilGorge.getMaximalPads()) {
+            if (p.isMinimal() && p.isMaximal()) {
+                p.padVisited();
+                p.setParent(sourcePad);
+                paths.add(TheGorge.getPath(p));
+                // Need to somehow remove this path
+            }
+        }
         // TODO Adjust sourcePad to fit specification, for now main alread did
-        FloatingPad sourcePad = floatingPads.get(0);
         FloatingPad minimalPad = floatingPads.get(1);
         FloatingPad maximalPad = null;
         ArrayList<ArrayList<FloatingPad>> adjGorge = evilGorge.getAdjPads();
