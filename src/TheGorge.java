@@ -60,7 +60,7 @@ public class TheGorge {
      */
     public static String getPath(FloatingPad p) {
         if (p.isMaximal() && p.checkVisited()) {
-            String path = p.getLabel() + "\n";
+            String path = p.getLabel() + " \n";
             FloatingPad currentPad = p;
             while (!(currentPad.getParent().getLabel().compareTo(BigInteger.ONE) == 0)) {
                 currentPad = currentPad.getParent();

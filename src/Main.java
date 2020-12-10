@@ -17,7 +17,7 @@ public class Main {
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input0.txt"));
+            Scanner inFile = new Scanner(new File("input4.txt"));
             ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();
@@ -77,7 +77,7 @@ public class Main {
         }
         // Output phase
         try {
-            PrintWriter outFile = new PrintWriter("output4.txt");
+            PrintWriter outFile = new PrintWriter("output.txt");
             for (String s : hoppingPaths) {
                 outFile.print(s);
             }
