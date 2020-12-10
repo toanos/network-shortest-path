@@ -81,6 +81,7 @@ public class TheGorge {
      */
     private void constructAdjFloatingPads() {
         adjPads = new ArrayList<>();
+        // TODO Implement to show pad 1 actually connected to minimal pads
         for (int i = 0; i < floatingPads.size(); i++) {
             FloatingPad u = floatingPads.get(i);
             ArrayList<FloatingPad> neighborsV = new ArrayList<>();
@@ -109,7 +110,8 @@ public class TheGorge {
      */
     public String hobbitHoppingPad(FloatingPad targetPad) {
         String result = "";
-        if (targetPad.isMaximal() && targetPad.checkVisited()) {
+//        if (targetPad.isMaximal() && targetPad.checkVisited()) {
+        if (targetPad.isMaximal()) {
             result = targetPad.getLabel() + " \n";
             FloatingPad currentPad = removePad(targetPad);
             while (!currentPad.getParent().equals(floatingPads.get(0))) {
@@ -117,12 +119,20 @@ public class TheGorge {
                 result = currentPad.getLabel() + " " + result;
             }
             result = "1 " + result;
+            resetGorge();
             constructAdjFloatingPads();
         } else {
             System.out.println(targetPad + "has not been visited.");
             result = "Error: No path for " + targetPad;
         }
         return result;
+    }
+
+    private void resetGorge() {
+        for (FloatingPad p : floatingPads) {
+            p.reinitializeFloatingPad();
+            p.clearIncomingTraffic();
+        }
     }
 
     /**

@@ -16,7 +16,7 @@ public class Main {
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input0.txt"));
+            Scanner inFile = new Scanner(new File("input3.txt"));
             ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();
@@ -35,6 +35,8 @@ public class Main {
         saveHobbits.printAdjList();
         System.out.println();
         ///////////////////////////////////// Frodo perform Dijkstra's algorithm /////////////////////////////////
+        FloatingPad test = hopShortestPath(pads.get(1), saveHobbits);
+        hoppingPaths.add(saveHobbits.hobbitHoppingPad(test));
         ///////////////////////////////////// End of Frodo perform Dijkstra's algorithm //////////////////////////
         // Console output
         System.out.println("The gorge has " + pads.size() + " floating pads.");
@@ -66,41 +68,39 @@ public class Main {
         }
     }
 
-    // NOTE the paths parameter is pass by reference
-    public static void findPaths(TheGorge evilGorge, ArrayList<String> paths) {
-        // NOTE: Use a list of pad to keep track of potential hopping path for the Hobbits
-        ArrayList<FloatingPad> floatingPads = evilGorge.getTheGorge();
-        FloatingPad sourcePad = floatingPads.get(0);
-//        while (evilGorge.getMaximalPads().size() > 0) {
-        // NOTE: If a path is both minimal & maximal, take that path first
-        for (FloatingPad p : evilGorge.getMaximalPads()) {
-            if (p.isMinimal() && p.isMaximal()) {
-                p.padVisited();
-                p.setParent(sourcePad);
-                paths.add(evilGorge.hobbitHoppingPad(p));
-            }
-        }
-        FloatingPad minimalPad = floatingPads.get(1);
-        FloatingPad maximalPad = null;
-        ArrayList<ArrayList<FloatingPad>> adjGorge = evilGorge.getAdjPads();
-        Queue<FloatingPad> myQ = new LinkedList<>();
-        myQ.add(minimalPad);
-        while (myQ.size() > 0) {
-            FloatingPad uPad = myQ.remove();
-            // NOTE: index of the floating pads are the same with the adjacency list
-            int indU = floatingPads.indexOf(uPad);
-            for (FloatingPad vPad : adjGorge.get(indU)) {
-                if (vPad.isMaximal()) { maximalPad = vPad; }
-                if (!vPad.checkVisited()) {
-                    // TODO Still need to implement more
-                    vPad.setParent(uPad);
-                    myQ.add(vPad);
+    /**
+     * Find the shortest path from the specified minimal pad to a maximal path
+     *
+     * @param minPad the starting minimal pad
+     * @param g the gorge where all the pads lie
+     * @return the maximal pad with the generated shortest path
+     */
+    public static FloatingPad hopShortestPath(FloatingPad minPad, TheGorge g) {
+        FloatingPad result = null;
+        // Let s be the source
+        FloatingPad s = minPad;
+        s.setScore(0.0);
+        ArrayList<FloatingPad> padList = g.getTheGorge();
+        ArrayList<ArrayList<FloatingPad>> adjPads = g.getAdjPads();
+        PriorityQueue<FloatingPad> pQ = new PriorityQueue<>(padList);
+        while (!pQ.isEmpty()) {
+            FloatingPad u = pQ.poll();
+            if (u.getScore() < Double.POSITIVE_INFINITY) {
+                int uAdjIndex = padList.indexOf(u);
+                for (FloatingPad v : adjPads.get(uAdjIndex)) {
+                    if (u.getScore() + v.getIncomingTraffic() < v.getScore()) {
+                        v.setScore(u.getScore() + v.getIncomingTraffic());
+                        v.setParent(u);
+                    }
+                    if (v.isMaximal()) {
+                        result = v;
+                        pQ.clear();
+                        break;
+                    }
                 }
             }
-            uPad.padVisited();
         }
-        // BFS finished, now store the generated path
-        paths.add(evilGorge.hobbitHoppingPad(maximalPad));
-//        }
+        return result;
     }
+
 }
