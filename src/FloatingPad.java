@@ -25,6 +25,7 @@ public class FloatingPad implements Comparable<FloatingPad> {
         maximal = true;
         visited = false;
         incomingTraffic = 0;
+        score = 0;
         parent = null;
     }
 
@@ -111,6 +112,7 @@ public class FloatingPad implements Comparable<FloatingPad> {
     public int getScore() {
         return this.score;
     }
+    public void setScore(int s) { this.score = s; }
 
     private static int numPads = 0;
     private BigInteger label;

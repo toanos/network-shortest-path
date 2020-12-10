@@ -17,7 +17,7 @@ public class Main {
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input4.txt"));
+            Scanner inFile = new Scanner(new File("input0.txt"));
             ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();
@@ -75,6 +75,15 @@ public class Main {
         for (String s : hoppingPaths) {
             System.out.print(s);
         }
+        ////////////////// Dijkstra Testing /////////////////////
+        saveHobbits.initializePadScore();
+        PriorityQueue<FloatingPad> h = new PriorityQueue<>(pads);
+        System.out.println("Print Priority Queue h");
+        while (h.peek() != null) {
+            FloatingPad p = h.poll();
+            System.out.println(p + ", Score = " + p.getScore());
+        }
+        ////////////////// End of Dijkstra Testing /////////////////////
         // Output phase
         try {
             PrintWriter outFile = new PrintWriter("output.txt");

@@ -40,6 +40,12 @@ public class TheGorge {
         trackMaximalPads();
     }
 
+    public void initializePadScore() {
+        for (FloatingPad p : floatingPads) {
+            p.setScore(p.getIncomingTraffic());
+        }
+    }
+
     /**
      * Default constructor
      */
