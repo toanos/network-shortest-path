@@ -19,8 +19,6 @@ public class TheGorge {
         this();
         for (BigInteger b : padList) {
             floatingPads.add(new FloatingPad(b));
-            // NOTE: these new pads have at least 1 in-degree
-            floatingPads.get(floatingPads.size() - 1).incrementTraffic();
         }
         // Determine minimality & maximality of newly constructed pads
         /* NOTE: Pad 1 is not a maximal pad because hobbits can hop from it.
@@ -65,6 +63,7 @@ public class TheGorge {
         for (FloatingPad p : floatingPads) {
             if (p.isMinimal()) {
                 p.setParent(floatingPads.get(0));
+                p.incrementTraffic();
             }
         }
     }
