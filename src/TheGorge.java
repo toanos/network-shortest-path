@@ -25,7 +25,7 @@ public class TheGorge {
         /* Construct an adjacency-list pads */
         constructAdjFloatingPads();
         // TODO Determine minimality & maximality of newly constructed pads
-        // TODO Keep track of maximal pads
+        trackMinimalPads();
         trackMaximalPads();
     }
 
@@ -38,6 +38,7 @@ public class TheGorge {
         floatingPads.add(new FloatingPad());
         adjPads = null;
         maximalPads = new ArrayList<FloatingPad>();
+        minimalPads = new ArrayList<FloatingPad>();
     }
 
     /**
@@ -170,6 +171,17 @@ public class TheGorge {
         }
     }
 
+    /**
+     * Find pre-determined maximal pads and store their references (HELPER)
+     */
+    private void trackMinimalPads() {
+        for (FloatingPad p : floatingPads) {
+            if (p.isMinimal()) {
+                this.minimalPads.add(p);
+            }
+        }
+    }
+
     public ArrayList<FloatingPad> getMaximalPads() {
         return this.maximalPads;
     }
@@ -177,7 +189,7 @@ public class TheGorge {
     // Gorge's instances
     private ArrayList<FloatingPad> floatingPads; // Note: Vertices of the graph
     private ArrayList<FloatingPad> maximalPads;
-    // NOTE: HAve a list for tracking minimal pads
+    private ArrayList<FloatingPad> minimalPads;
     private ArrayList<ArrayList<FloatingPad>> adjPads; // Note: The adjacency list of the graph
 
 }
