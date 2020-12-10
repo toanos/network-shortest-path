@@ -12,7 +12,6 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-//        int gorgeSize = 0;
         TheGorge saveHobbits = null;
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
@@ -30,42 +29,6 @@ public class Main {
         }
 
         ArrayList<FloatingPad> pads = saveHobbits.getTheGorge();
-//        gorgeSize = pads.size();
-        /* NOTE: Pad 1 is not a maximal pad because hobbits can hop from it.
-         * Since it is the starting pad, it definitely not minimal since hobbits are standing on it
-         * so they can't jump onto it.
-         * Another way of thinking is that the minimal pad is the SOURCE of the graph and the maximal pad is the SINK.
-         */
-        pads.get(0).padNotMinimal();
-        pads.get(0).padNotMaximal();
-        // Determine MINIMALITY (can't hop INTO except for pad 1) of all the pads
-        for (int i = pads.size() - 1; i >= 0; i--) {
-            for (int j = 0; j < i; j++) {
-                BigInteger padA = pads.get(i).getLabel();
-                BigInteger padB = pads.get(j).getLabel();
-                if (!padB.gcd(padA).equals(BigInteger.ONE)) {
-                    pads.get(i).padNotMinimal();
-                    break;
-                }
-            }
-        }
-        // Determine MAXIMALITY (can't hop FROM) of all the pads
-        for (int i = 0; i < pads.size() - 1; i++) {
-            for (int j = i + 1; j < pads.size(); j++) {
-                BigInteger padA = pads.get(i).getLabel();
-                BigInteger padB = pads.get(j).getLabel();
-                if (!padB.gcd(padA).equals(BigInteger.ONE)) {
-                    pads.get(i).padNotMaximal();
-                    break;
-                }
-            }
-        }
-        // Connect 1 to minimal pads
-        for (FloatingPad p : pads) {
-            if (p.isMinimal()) {
-                p.setParent(pads.get(0));
-            }
-        }
         // Console output
         System.out.println("The gorge has " + pads.size() + " floating pads.");
         System.out.println(saveHobbits);

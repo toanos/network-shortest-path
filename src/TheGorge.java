@@ -22,9 +22,44 @@ public class TheGorge {
             // NOTE: these new pads have at least 1 in-degree
             floatingPads.get(floatingPads.size() - 1).incrementTraffic();
         }
+        // TODO Determine minimality & maximality of newly constructed pads
+        /* NOTE: Pad 1 is not a maximal pad because hobbits can hop from it.
+         * Since it is the starting pad, it definitely not minimal since hobbits are standing on it
+         * so they can't jump onto it.
+         * Another way of thinking is that the minimal pad is the SOURCE of the graph and the maximal pad is the SINK.
+         */
+        floatingPads.get(0).padNotMinimal();
+        floatingPads.get(0).padNotMaximal();
+        // Determine MINIMALITY (can't hop INTO except for pad 1) of all the pads
+        for (int i = floatingPads.size() - 1; i >= 0; i--) {
+            for (int j = 0; j < i; j++) {
+                BigInteger padA = floatingPads.get(i).getLabel();
+                BigInteger padB = floatingPads.get(j).getLabel();
+                if (!padB.gcd(padA).equals(BigInteger.ONE)) {
+                    floatingPads.get(i).padNotMinimal();
+                    break;
+                }
+            }
+        }
+        // Determine MAXIMALITY (can't hop FROM) of all the pads
+        for (int i = 0; i < floatingPads.size() - 1; i++) {
+            for (int j = i + 1; j < floatingPads.size(); j++) {
+                BigInteger padA = floatingPads.get(i).getLabel();
+                BigInteger padB = floatingPads.get(j).getLabel();
+                if (!padB.gcd(padA).equals(BigInteger.ONE)) {
+                    floatingPads.get(i).padNotMaximal();
+                    break;
+                }
+            }
+        }
+        // Connect 1 to minimal pads
+        for (FloatingPad p : floatingPads) {
+            if (p.isMinimal()) {
+                p.setParent(floatingPads.get(0));
+            }
+        }
         /* Construct an adjacency-list pads */
         constructAdjFloatingPads();
-        // TODO Determine minimality & maximality of newly constructed pads
         trackMinimalPads();
         trackMaximalPads();
     }
