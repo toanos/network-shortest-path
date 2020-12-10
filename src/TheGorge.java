@@ -103,7 +103,8 @@ public class TheGorge {
     }
 
     /**
-     * Once the hobbit crosses to the other side, the traversed pad will drop into the gorge.
+     * Once the hobbit crosses to the other side, the traversed pad will drop into the gorge. Formally,
+     * reset the gorge with remaining floating pads.
      *
      * @param targetPad the floating pad the hobbit needs to reach in order to be saved
      * @return the path the hobbit traversed
@@ -119,8 +120,11 @@ public class TheGorge {
                 result = currentPad.getLabel() + " " + result;
             }
             result = "1 " + result;
+            // Perform clean-up procedures
             resetGorge();
             constructAdjFloatingPads();
+            trackMinimalPads();
+            trackMaximalPads();
         } else {
             System.out.println(targetPad + "has not been visited.");
             result = "Error: No path for " + targetPad;
