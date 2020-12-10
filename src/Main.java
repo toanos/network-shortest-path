@@ -75,7 +75,7 @@ public class Main {
         for (String s : hoppingPaths) {
             System.out.print(s);
         }
-        ////////////////// Dijkstra Testing /////////////////////
+        ////////////////// PQ Testing /////////////////////
         saveHobbits.initializePadScore();
         PriorityQueue<FloatingPad> h = new PriorityQueue<>(pads);
         System.out.println("Print Priority Queue h");
@@ -83,7 +83,7 @@ public class Main {
             FloatingPad p = h.poll();
             System.out.println(p + ", Score = " + p.getScore());
         }
-        ////////////////// End of Dijkstra Testing /////////////////////
+        ////////////////// End of PQ Testing /////////////////////
         // Output phase
         try {
             PrintWriter outFile = new PrintWriter("output.txt");

@@ -56,8 +56,6 @@ public class TheGorge {
             }
             adjPads.add(neighborsV);
         }
-        System.out.println("Output of Adjacency List:");
-        printAdjList();
     }
 
     public void initializePadScore() {
@@ -123,6 +121,7 @@ public class TheGorge {
      */
     public void printAdjList() {
         String result = "";
+        System.out.println("ADJACENCY LIST:");
         for (int i = 0; i < adjPads.size(); i++) {
             result += "(In-degree: " + floatingPads.get(i).getIncomingTraffic() + ") ";
             result += floatingPads.get(i).toString() + ":";
