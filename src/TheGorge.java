@@ -28,6 +28,20 @@ public class TheGorge {
         trackMaximalPads();
     }
 
+    /**
+     * Default constructor
+     */
+    public TheGorge() {
+        floatingPads = new ArrayList<FloatingPad>();
+        // NOTE: The floating pad 1 always the starting pad. IOW, the source vertex
+        floatingPads.add(new FloatingPad());
+        adjPads = null;
+        maximalPads = new ArrayList<FloatingPad>();
+    }
+
+    /**
+     * Construct an adjacency list of all floating pads. This also check for traffic for each floating pads
+     */
     private void constructAdjFloatingPads() {
         adjPads = new ArrayList<>();
         for (int i = 0; i < floatingPads.size(); i++) {
@@ -42,6 +56,8 @@ public class TheGorge {
             }
             adjPads.add(neighborsV);
         }
+        System.out.println("Output of Adjacency List:");
+        printAdjList();
     }
 
     public void initializePadScore() {
@@ -51,23 +67,12 @@ public class TheGorge {
     }
 
     /**
-     * Default constructor
-     */
-    public TheGorge() {
-        floatingPads = new ArrayList<FloatingPad>();
-        // NOTE: The floating pad 1 always the starting pad. IOW, the source vertex
-        floatingPads.add(new FloatingPad());
-        adjPads = null;
-        maximalPads = new ArrayList<FloatingPad>();
-    }
-
-    /**
      * Once the hobbit crosses to the other side, the traversed pad will drop into the gorge.
      *
      * @param targetPad the floating pad the hobbit needs to reach in order to be saved
      * @return the path the hobbit traversed
      */
-    public String hobbitHoppingPad (FloatingPad targetPad) {
+    public String hobbitHoppingPad(FloatingPad targetPad) {
         String result = "";
         if (targetPad.isMaximal() && targetPad.checkVisited()) {
             result = targetPad.getLabel() + " \n";
@@ -77,6 +82,7 @@ public class TheGorge {
                 result = currentPad.getLabel() + " " + result;
             }
             result = "1 " + result;
+            constructAdjFloatingPads();
         } else {
             System.out.println(targetPad + "has not been visited.");
             result = "Error: No path for " + targetPad;
@@ -84,12 +90,16 @@ public class TheGorge {
         return result;
     }
 
-    /** Return the list of floating pads of the gorge */
+    /**
+     * Return the list of floating pads of the gorge
+     */
     public ArrayList<FloatingPad> getTheGorge() {
         return this.floatingPads;
     }
 
-    /** Return the adjacency list of floating pads of the gorge */
+    /**
+     * Return the adjacency list of floating pads of the gorge
+     */
     public ArrayList<ArrayList<FloatingPad>> getAdjPads() {
         return this.adjPads;
     }
@@ -108,7 +118,9 @@ public class TheGorge {
         return result;
     }
 
-    /** Console output the adjacency list of the gorge */
+    /**
+     * Console output the adjacency list of the gorge
+     */
     public void printAdjList() {
         String result = "";
         for (int i = 0; i < adjPads.size(); i++) {
@@ -122,12 +134,16 @@ public class TheGorge {
         }
     }
 
-    /** Return the number of maximal pads available */
+    /**
+     * Return the number of maximal pads available
+     */
     public int countMaximal() {
         return this.maximalPads.size();
     }
 
-    /** Find pre-determined maximal pads and store their references (HELPER) */
+    /**
+     * Find pre-determined maximal pads and store their references (HELPER)
+     */
     private void trackMaximalPads() {
         for (FloatingPad p : floatingPads) {
             if (p.isMaximal()) {
@@ -136,7 +152,9 @@ public class TheGorge {
         }
     }
 
-    public ArrayList<FloatingPad> getMaximalPads() { return this.maximalPads; }
+    public ArrayList<FloatingPad> getMaximalPads() {
+        return this.maximalPads;
+    }
 
     // Gorge's instances
     private ArrayList<FloatingPad> floatingPads; // Note: Vertices of the graph

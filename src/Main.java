@@ -146,7 +146,6 @@ public class Main {
                 p.padVisited();
                 p.setParent(sourcePad);
                 paths.add(evilGorge.hobbitHoppingPad(p));
-                // Need to somehow remove this path
             }
         }
         FloatingPad minimalPad = floatingPads.get(1);
