@@ -16,7 +16,7 @@ public class Main {
         ArrayList<String> hoppingPaths = new ArrayList<>();
         // Input phase
         try {
-            Scanner inFile = new Scanner(new File("input4.txt"));
+            Scanner inFile = new Scanner(new File("input5.txt"));
             ArrayList<BigInteger> inputPads = new ArrayList<>();
             do {
                 String line = inFile.nextLine();
@@ -24,6 +24,7 @@ public class Main {
             } while (inFile.hasNextLine());
             Collections.sort(inputPads);
             saveHobbits = new TheGorge(inputPads);
+            inFile.close();
         } catch (IOException e) {
             System.out.println("Input file does not exist! Program terminated.");
         }
