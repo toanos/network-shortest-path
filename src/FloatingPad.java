@@ -1,5 +1,4 @@
 import java.math.BigInteger;
-import java.util.LinkedList;
 
 /**
  * This class represents the floating pad for the Hobbits to hop on.
@@ -25,8 +24,15 @@ public class FloatingPad implements Comparable<FloatingPad> {
         maximal = true;
         visited = false;
         incomingTraffic = 0;
-        score = 0;
+        score = Double.POSITIVE_INFINITY;
         parent = null;
+    }
+
+    /** Single source initialize floating pad */
+    public void reinitializeFloatingPad() {
+        this.visited = false;
+        this.score = Double.POSITIVE_INFINITY;
+        this.parent = null;
     }
 
     public void setParent(FloatingPad p) {
@@ -43,6 +49,11 @@ public class FloatingPad implements Comparable<FloatingPad> {
 
     public void incrementTraffic() {
         this.incomingTraffic++;
+    }
+
+    /** Clear traffic for new construction of adjacency list. Formally, the weight of pad is the number of in-degrees */
+    public void clearIncomingTraffic() {
+        this.incomingTraffic = 0;
     }
 
     /**
@@ -97,11 +108,11 @@ public class FloatingPad implements Comparable<FloatingPad> {
         return false;
     }
 
-    public int getScore() {
+    public double getScore() {
         return this.score;
     }
 
-    public void setScore(int s) { this.score = s; }
+    public void setScore(double s) { this.score = s; }
 
     @Override
     public int compareTo(FloatingPad b) {
@@ -132,6 +143,6 @@ public class FloatingPad implements Comparable<FloatingPad> {
     private boolean visited;
     private FloatingPad parent;
     private int incomingTraffic;
-    private int score;
+    private double score;
 
 }
