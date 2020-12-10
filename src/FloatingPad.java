@@ -86,9 +86,16 @@ public class FloatingPad implements Comparable<FloatingPad> {
         }
     }
 
-
-
-
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof FloatingPad) {
+            FloatingPad p = (FloatingPad) o;
+            if (this.label.equals(p.label)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public int getScore() {
         return this.score;

@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * This class represents the gore with floating pads that the Hobbits need to
@@ -86,6 +87,17 @@ public class TheGorge {
             result = "Error: No path for " + targetPad;
         }
         return result;
+    }
+
+    /** Remove a floating pad. Formally, traverse the floating pad list and remove the specified element */
+    private void removePad(FloatingPad p) {
+        ListIterator<FloatingPad> flPadListIt = this.floatingPads.listIterator();
+        while (flPadListIt.hasNext()) {
+            FloatingPad q = flPadListIt.next();
+            if (p.equals(q)) {
+                flPadListIt.remove();
+            }
+        }
     }
 
     /**
